@@ -6,6 +6,7 @@ import avatar from './assets/avatar.jpeg'
 import { Avatar } from './components/Avatar';
 import { Contact } from './components/Contact';
 import { Experience } from './components/Experience';
+import Counter from './components/Counter';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
      <div className="main-container">
         <Contact />
         <Avatar avatar={avatar} width="200" />
-      <Experience/>
+        <Experience />
       </div>
+       <Counter/>
       </div>
   );
 }

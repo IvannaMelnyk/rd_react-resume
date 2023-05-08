@@ -420,3 +420,12 @@ background-color: #86a3b4;}
 td {
   background-color: #b8bcca;
 }
+.counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding-bottom: 10px;
+  background-color: #96acba;
+}

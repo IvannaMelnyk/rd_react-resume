@@ -5,7 +5,7 @@ import './fetch-repos'
 import avatar from './assets/avatar.jpeg'
 import { Avatar } from './components/Avatar';
 import { Contact } from './components/Contact';
-import { Experience } from './components/Experience';
+import { Skills } from './components/Skills';
 import Counter from './components/Counter';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
      <div className="main-container">
         <Contact />
         <Avatar avatar={avatar} width="200" />
-        <Experience />
+        <Skills />
+     
       </div>
        <Counter/>
       </div>

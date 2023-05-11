@@ -6,7 +6,6 @@ import avatar from './assets/avatar.jpeg'
 import { Avatar } from './components/Avatar';
 import { Contact } from './components/Contact';
 import { Skills } from './components/Skills';
-import Counter from './components/Counter';
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
         <Skills />
      
       </div>
-       <Counter/>
+   
       </div>
   );
 }

@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from 'react';
+
 const GITHUB_URL_BASE = 'https://api.github.com';
 const GITHUB_USER = 'IvannaMelnyk';
-const GITHUB_TOKEN ="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"
 //GITHUB_TOKEN hide in token folder
+
 class GithubApi {
   constructor(token, username) {
     this.token = token;
@@ -20,40 +22,61 @@ class GithubApi {
   }
 }
 
-const repos = document.querySelector(".project-list");
-const loader = document.querySelector(".loader");
+const MyMyRepos = () => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function createElement(data) {
-  const repo = document.createElement("tr");
-  repo.classList.add("project");
+  useEffect(() => {
+    const githubApi = new GithubApi(GITHUB_TOKEN, GITHUB_USER);
 
-  const link = document.createElement("a");
-  link.textContent = data.full_name;
-  link.setAttribute("href", data.html_url);
-  link.setAttribute("target", "_blank");
+    const fetchData = async () => {
+      try {
+        const data = await githubApi.getRepos();
+        if (data.length > 0) {
+          setProjects(data);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
 
-  repo.appendChild(link);
+    fetchData();
+  }, []);
 
-  if (data.description) {
-    const desc = document.createElement("td");
-    desc.textContent = data.description;
-    repo.appendChild(desc);
-  }
+  const renderProjects = () => {
+    if (loading) {
+      return <div className="loader">Loading...</div>;
+    }
 
-  repos.appendChild(repo);
-}
+    if (projects.length === 0) {
+      return <div>No projects found.</div>;
+    }
 
-async function fetchAllAsync() {
-  const githubApi = new GithubApi(GITHUB_TOKEN, GITHUB_USER);
-  const data = await githubApi.getRepos();
-  if (!data.length) {
-    return;
-  }
-  loader.remove();
+    return (
+      <table className="project-list">
+        <tbody>
+          {projects.map((project) => (
+            <tr className="project" key={project.id}>
+              <td>
+                <a href={project.html_url} target="_blank" rel="noopener noreferrer">
+                  {project.full_name}
+                </a>
+              </td>
+              {project.description && <td>{project.description}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
 
-  data.forEach(project => {
-    createElement(project);
-  });
-}
+  return (
+    <>
+      <h1>My Projects</h1>
+      {renderProjects()}
+    </>
+  );
+};
 
-fetchAllAsync();
+export default MyRepos;

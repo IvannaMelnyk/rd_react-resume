@@ -1,3 +1,4 @@
+import MyRepos from '../fetch-repos-tokens';
 import { WorkExperienceList } from './ExperienceList'; 
 
 export function Skills() {
@@ -48,20 +49,7 @@ export function Skills() {
             </div>
             </div>
             
-          <div className="work-section-projects">
-            <h2 className="decorator-variant decorator-two" id="e">
-              Projects</h2>
-            <table >
-              <h2>My repositories</h2>
-              <tbody className="project-list">
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </tbody>
-              <div className="loader">Loading...</div>
-            </table>
-          </div>
+       <MyRepos/>
         </section>
         </div>
     )
